@@ -3,6 +3,7 @@ Time travel in your text, manage your project versions and some other things.
 ## Important note: the project is not finalised but should soon be distributed on this page.
 ### Feature list
  * Place time tags in your text and browse through them through a list.
+ * Save versions of your whole project and access them instantly from within the program. You may even create branchs and form an arborescence of versions. (It sounds complicated but it is in fact simple to do and understand.)
  * Fullscreen by default.
  * Custom background.
  * Light and dark mode, switchable in one click.
