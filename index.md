@@ -1,4 +1,3 @@
-# Garden of Mists
 Time travel in your text, manage your project versions and some other things.
 ## Important note: the project is not finalised but should soon be distributed on this page.
 ### Feature list
