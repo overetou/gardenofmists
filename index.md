@@ -1,3 +1,4 @@
+# Garden of Mists ![logo](/assets/logo.svg)
 Time travel in your text, manage your project versions and some other things.
 ## Important note: the project is not finalised but should soon be distributed on this page.
 ### Feature list
@@ -16,7 +17,7 @@ Time travel in your text, manage your project versions and some other things.
 ### Help?
 If you notice a bug, want to share new features ideas, would like the software to be faster or anything else,
 please create an "issue" [here](https://github.com/overetou/gardenofmists/issues).
-You will need a github account (it's free).
+You will need a github account (it's free).  
 *At any moment, you can press Ctrl-h to learn the essential keybindings of the program.*
 
 ### What's coming next?
