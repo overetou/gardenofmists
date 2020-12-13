@@ -1,5 +1,3 @@
-# Garden of Mists ![logo](/assets/logo.svg)
-Time travel in your text, manage your project versions and some other things.
 ## Important note: the project is not finalised but should soon be distributed on this page.
 ### Feature list
  * Place time tags in your text and browse through them through a list.
