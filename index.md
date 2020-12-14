@@ -1,4 +1,6 @@
 ## Important note: the project is not finalised but should soon be distributed on this page.
+### Downloads
+Windows: [last version](empty) (there is none for now)
 ### Feature list
  * Place time tags in your text and browse through them through a list.
  * Save versions of your whole project and access them instantly from within the program. You may even create branchs and form an arborescence of versions. (It sounds complicated but it is in fact simple to do and understand.)
