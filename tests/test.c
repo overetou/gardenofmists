@@ -11,6 +11,7 @@ static void	test_exit()
 
 static void	change_test_section(const char *new_section)
 {
+	printf("[%s]\n", new_section);
 	test_section = new_section;
 	test_number = 1;
 }
@@ -32,7 +33,7 @@ static BOOL test_strings_eq(const char *s1, const char *s2)
 	if (s1len != s2len)
 	{
 		test(FALSE);
-		printf("s1 len = %u, s2 len = %u.\n", s1len, s2len);
+		printf("s1 len = %u, s2 len = %u.\n%s\n-----\n%s\n", s1len, s2len, s1, s2);
 		return TRUE;
 	}
 	i = 0;
@@ -81,18 +82,40 @@ void	test_proj_path()
 	m.realloc_string = NULL;
 	#ifdef _WIN32
 	#else
-	init_str("/user/oto/gardenofmists/", m.arg0);
-	init_str("variables/tera.bin", &e1);
+	init_str("/user/oto/gardenofmists/", &(m.arg0));
+	init_str("variables/téra.bin", &e1);
 	proj_path(&e1, &m);
-	test_strings_eq(m.realloc_string, "/user/oto/gardenofmists/variables/tera.bin");
+	test_strings_eq(m.realloc_string, "/user/oto/gardenofmists/variables/téra.bin");
 	#endif
 	free(m.realloc_string);
+	m.realloc_string = NULL;
+}
+
+void	test_proj_variable_path()
+{
+	change_test_section("proj_variable_path");
+	t_master m;
+	t_const_str e1;
+	t_const_str e2;
+
+	m.realloc_string = NULL;
+	#ifdef _WIN32
+	#else
+	init_str("/user/oto/gardenofmists/", &(m.arg0));
+	init_str("variables/carcasson/", &e1);
+	init_str("parkéba", &e2);
+	proj_variable_path(&e1, (t_str*)(&e2), &m);
+	test_strings_eq(m.realloc_string, "/user/oto/gardenofmists/variables/carcasson/parkéba");
+	#endif
+	free(m.realloc_string);
+	m.realloc_string = NULL;
 }
 
 void	passing_tests()
 {
 	test_path_len();
 	test_proj_path();
+	test_proj_variable_path();
 }
 
 int main(void)
