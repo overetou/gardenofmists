@@ -2,7 +2,6 @@
 # define GARDENOFMISTS
 
 # include <git2.h>
-# include <stdio.h>
 # include <gtk/gtk.h>
 
 # ifdef _WIN32
@@ -37,11 +36,15 @@ typedef struct s_master
 	BOOL		dark_mode;
 } t_master;
 
-void critical_test(char bool_val, const char *msg);
-void	handle_git_error(const int error_code);
-UINT	path_len(const char *path);
-void	proj_path(t_const_str *path_end, t_master *m);
-void	proj_variable_path(t_const_str *folders, t_str *path_end, t_master *m);
-void	init_str(const char *s, t_const_str *to_init);
+void		critical_test(char bool_val, const char *msg);
+void		handle_git_error(const int error_code);
+UINT		path_len(const char *path);
+void		proj_path(t_const_str *path_end, t_master *m);
+void		proj_variable_path(t_const_str *folders, t_str *path_end, t_master *m);
+t_const_str	*init_str(const char *s, t_const_str *to_init);
+t_const_str	*init_str_with_len(const char *s, UINT len, t_const_str *to_init);
+void		load_css(t_master *m);
+void		display_error(const char *s, t_master *m);
+void		display_notif(const char *msg, t_master *m);
 
 #endif

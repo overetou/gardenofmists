@@ -68,8 +68,8 @@ void	test_path_len()
 	change_test_section("path_len");
 	#ifdef _WIN32
 	#else
-	test_uint_eq(path_len("/this/is/an/absolute/path"), 21);
-	test_uint_eq(path_len("yo/my/man"), 6);
+	test_uint_eq(path_len("/this/is/an/absolute/gardenoftests"), 21);
+	test_uint_eq(path_len("yo/my/gardenoftests"), 6);
 	#endif
 }
 
@@ -86,6 +86,9 @@ void	test_proj_path()
 	init_str("variables/téra.bin", &e1);
 	proj_path(&e1, &m);
 	test_strings_eq(m.realloc_string, "/user/oto/gardenofmists/variables/téra.bin");
+	init_str("./", &(m.arg0));
+	proj_path(init_str("yo", &e1), &m);
+	test_strings_eq(m.realloc_string, "./yo");
 	#endif
 	free(m.realloc_string);
 	m.realloc_string = NULL;
@@ -113,13 +116,13 @@ void	test_proj_variable_path()
 
 void	passing_tests()
 {
-	test_path_len();
 	test_proj_path();
 	test_proj_variable_path();
 }
 
 int main(void)
 {
+	test_path_len();
 	(void)test_exit;
 	(void)test_strings_eq;
 	(void)passing_tests;//passing_tests();
