@@ -9,11 +9,11 @@ LIB_DIRS=
 
 #Compilation related indications
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror `pkg-config --cflags gtk+-3.0`
 LIBS=git2
 
 #From there we use the info to compile everything.
-SRC_FILE_NAMES = main.c common.c git.c
+SRC_FILE_NAMES = main.c common.c git.c load_css.c
 SOURCES=$(addprefix $(SRC_DIR)/, $(SRC_FILE_NAMES))
 OBJS:=$(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 INC_FLAGS=$(addprefix -I,$(INC_DIRS))
@@ -44,4 +44,7 @@ debian-deps:
 	echo "No dependencies"
 
 test:
-	@gcc -Wall -Wextra -Werror tests/test.c
+	@$(CC) $(CFLAGS) $(SRC_DIR)/common.c $(SRC_DIR)/git.c tests/test.c $(LIBIDR_FLAGS) $(LIBS_FLAGS) `pkg-config --libs gtk+-3.0`
+
+exec_test:
+	./a.out
