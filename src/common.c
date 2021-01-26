@@ -1,4 +1,5 @@
 #include "gardenofmists.h"
+#include <libgen.h>
 
 void	memcopy(char *dest, const char *src, const UINT len)
 {
@@ -28,19 +29,19 @@ t_const_str	*init_str_with_len(const char *s, UINT len, t_const_str *to_init)
 //Adds the given string to the path of the project.
 void	proj_path(t_const_str *path_end, t_master *m)
 {
-	m->realloc_string = realloc(m->realloc_string, m->arg0.len + path_end->len + 1);
-	memcopy(m->realloc_string, m->arg0.s, m->arg0.len);
-	memcopy(m->realloc_string + m->arg0.len, path_end->s, path_end->len);
-	m->realloc_string[m->arg0.len + path_end->len] = '\0';
+	m->realloc_string = realloc(m->realloc_string, m->proj_path.len + path_end->len + 1);
+	memcopy(m->realloc_string, m->proj_path.s, m->proj_path.len);
+	memcopy(m->realloc_string + m->proj_path.len, path_end->s, path_end->len);
+	m->realloc_string[m->proj_path.len + path_end->len] = '\0';
 }
 
 void	proj_variable_path(t_const_str *folders, t_str *path_end, t_master *m)
 {
-	m->realloc_string = realloc(m->realloc_string, m->arg0.len + folders->len + path_end->len + 1);
-	memcopy(m->realloc_string, m->arg0.s, m->arg0.len);
-	memcopy(m->realloc_string + m->arg0.len, folders->s, folders->len);
-	memcopy(m->realloc_string + m->arg0.len + folders->len, path_end->s, path_end->len);
-	m->realloc_string[m->arg0.len + folders->len + path_end->len + 1] = '\0';
+	m->realloc_string = realloc(m->realloc_string, m->proj_path.len + folders->len + path_end->len + 1);
+	memcopy(m->realloc_string, m->proj_path.s, m->proj_path.len);
+	memcopy(m->realloc_string + m->proj_path.len, folders->s, folders->len);
+	memcopy(m->realloc_string + m->proj_path.len + folders->len, path_end->s, path_end->len);
+	m->realloc_string[m->proj_path.len + folders->len + path_end->len + 1] = '\0';
 }
 
 //Returns the length to last path separator character in the given string. (We know that the executable is named gardenofmists)
@@ -50,6 +51,18 @@ UINT	path_len(const char *path)
 	if (len >= 15)
 		return len - 13;
 	return 0;
+}
+
+char  *get_proj_path(void)
+{
+	char *path = malloc (80);
+	int dest_len = 80;
+
+	critical_test(readlink ("/proc/self/exe", path, dest_len) != -1,
+	"Could not read the location of the executable (must be < 80)");
+	dirname(path);
+	strcat(path, "/");
+	return path;
 }
 
 //The result must be true else the given message is displayed and the program ends.

@@ -31,9 +31,9 @@ typedef struct	s_const_str
 
 typedef struct s_master
 {
-	t_const_str	arg0;
-	char		*realloc_string;
-	BOOL		dark_mode;
+	t_const_str proj_path;
+	char		    *realloc_string;
+	BOOL		    dark_mode;
 } t_master;
 
 void		critical_test(char bool_val, const char *msg);
@@ -46,5 +46,5 @@ t_const_str	*init_str_with_len(const char *s, UINT len, t_const_str *to_init);
 void		load_css(t_master *m);
 void		display_error(const char *s, t_master *m);
 void		display_notif(const char *msg, t_master *m);
-
+char    *get_proj_path(void);
 #endif

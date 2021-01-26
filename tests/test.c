@@ -82,11 +82,11 @@ void	test_proj_path()
 	m.realloc_string = NULL;
 	#ifdef _WIN32
 	#else
-	init_str("/user/oto/gardenofmists/", &(m.arg0));
+	init_str("/user/oto/gardenofmists/", &(m.proj_path));
 	init_str("variables/téra.bin", &e1);
 	proj_path(&e1, &m);
 	test_strings_eq(m.realloc_string, "/user/oto/gardenofmists/variables/téra.bin");
-	init_str("./", &(m.arg0));
+	init_str("./", &(m.proj_path));
 	proj_path(init_str("yo", &e1), &m);
 	test_strings_eq(m.realloc_string, "./yo");
 	#endif
@@ -104,7 +104,7 @@ void	test_proj_variable_path()
 	m.realloc_string = NULL;
 	#ifdef _WIN32
 	#else
-	init_str("/user/oto/gardenofmists/", &(m.arg0));
+	init_str("/user/oto/gardenofmists/", &(m.proj_path));
 	init_str("variables/carcasson/", &e1);
 	init_str("parkéba", &e2);
 	proj_variable_path(&e1, (t_str*)(&e2), &m);
@@ -118,13 +118,19 @@ void	passing_tests()
 {
 	test_proj_path();
 	test_proj_variable_path();
+	test_path_len();
+}
+
+void  test_get_proj_path()
+{
+  change_test_section ("test_get_proj_path");
+  test_strings_eq (get_proj_path(), "/media/oto/DATA/Documents/code/unix/gardenofmists/");
 }
 
 int main(void)
 {
-	test_path_len();
 	(void)test_exit;
-	(void)test_strings_eq;
 	(void)passing_tests;//passing_tests();
+  test_get_proj_path ();
 	return 0;
 }

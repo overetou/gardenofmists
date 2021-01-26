@@ -1,0 +1,64 @@
+window {background-image: url("forest_village.jpg"); background-size: cover;}
+separator {color: transparent;border: none;}
+.big_text {font-size: 20px}
+.medium_text {font-size: 18px}
+.icon_size {font-size: 28px}
+.huge_size {font-size: 40px}
+.solid_background {background: #353535}
+.popover_background {background: #606060}
+.normal_foreground{color: #e0e0e0}
+.pale_text_color{color: #e0e0e0;}
+.white_caret{caret-color: #e0e0e0}
+.no_border {border: none; box-shadow: none; text-shadow: none;}
+.stylish_buttons {background: none; border-radius: 0; border-bottom: solid 4px transparent; color: ivory;}
+.stylish_buttons:hover {box-shadow: transparent;}
+.stylish_buttons_alternative {border-radius: 0; border-bottom: solid 4px #e0e0e0; color: ivory;}
+.stylish_buttons_alternative:hover {box-shadow: none;background: none}
+scrolledwindow undershoot.top,
+scrolledwindow undershoot.right,
+scrolledwindow undershoot.bottom,
+scrolledwindow undershoot.left { background-image: none;}
+.text_size{font-size: 16px;}
+text{background-color: #353535;color: #e0e0e0}
+textview{color: #e0e0e0}
+.padded {padding: 15px 15px}
+text {color: #e0e0e0;caret-color: #e0e0e0}
+entry {color: #e0e0e0; background: #353535}
+.band_button{color: #e0e0e0;border-radius: 0px}
+.band_button:hover {background: #252525}
+.band_button:focus {color: #f0f0f0}
+tabs {background-color: #353535;box-shadow: none;border: none;}
+tab {background-color: #353535;border: none;padding: 5px;box-shadow: none; outline: none;}
+header{background: #353535;}
+.band {margin-right: 20px; margin-left: 20px;}
+arrow{color: #e0e0e0; background: #353535;border:none}
+popover{border: 1px black solid;box-shadow: 0px 0px 4px black;}
+.shadowed {box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);}
+.option_button {background-color: #e0e0e0; color: #353535; border-radius: 0px;}
+.option_button:hover{background: #e0e0e0;color: crimson; text-shadow: none;}
+.spaced_verticaly{margin-bottom: 10px;}
+.thinely_spaced_verticaly{margin-bottom: 2px;}
+.padded_verticaly{padding-bottom: 10px;}
+.squared{border-radius: 0px;}
+.stack-switcher > button{border-radius: 0px;border: none;box-shadow: none;}
+.stack-switcher > button.text-button {
+	color:#e0e0e0;
+	background:#252525;
+	text-shadow: none;
+}
+.stack-switcher > button.text-button:checked{
+	background: #353535;box-shadow: none;
+}
+.dark_background {background: #252525}
+.alternative_hover:hover{background: #707070}
+.generous_vert_space{margin-bottom: 25px;}
+.up_space{margin-top: 25px}
+.up_vert_padding{padding-top: 10px;}
+.custom_listbox > row{
+	background: transparent;box-shadow: none;
+}
+.custom_listbox > row:selected{
+	color: #e0e0e0;
+}
+.clear_caracter_hover:hover{color: white;}
+.popover_rightbar{border-left: solid #606060 4px}

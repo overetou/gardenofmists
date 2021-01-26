@@ -3,16 +3,13 @@
 void	display_notif(const char *msg, t_master *m)
 {
 	char *s;
-	//t_const_str logo_path;
+	t_const_str logo_path;
 
-	printf("arg0 = %s\n", m->arg0.s);
-	//proj_path(init_str("assets/logo.svg", &logo_path), m);
-	printf("logo path = %s\n", m->realloc_string);
+	proj_path(init_str("assets/logo.svg", &logo_path), m);
 	#ifdef _WIN32
 	#else
-	s = malloc(m->arg0.len + 66 + strlen(msg));
-	sprintf(s, "notify-send -i `pwd`/assets/logo.svg 'Garden of Mists' '%s'", msg);
-	printf("About to process: %s\n", s);
+	s = malloc(m->proj_path.len + 66 + strlen(msg));
+	sprintf(s, "notify-send -i %s 'Garden of Mists' '%s'", m->realloc_string, msg);
 	#endif
 	system(s);
 	free(s);

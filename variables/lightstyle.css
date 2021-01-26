@@ -1,0 +1,65 @@
+window {background-image: url("forest_village.jpg"); background-size: cover;}
+separator {color: transparent;border: none;}
+.big_text {font-size: 20px}
+.medium_text {font-size: 18px}
+.icon_size {font-size: 28px}
+.huge_size {font-size: 40px}
+.solid_background {background: #e0e0e0}
+.popover_background {background: #f0f0f0}
+.normal_foreground{color: #353535}
+.pale_text_color{color: #e0e0e0;}
+.white_caret{caret-color: #353535}
+.no_border {border: none; box-shadow: none; text-shadow: none;}
+.stylish_buttons {background: none; border-radius: 0; border-bottom: solid 4px transparent; color: ivory;}
+.stylish_buttons:hover {box-shadow: transparent;}
+.stylish_buttons_alternative {border-radius: 0; border-bottom: solid 4px #e0e0e0; color: ivory;}
+.stylish_buttons_alternative:hover {box-shadow: none;background: none}
+scrolledwindow undershoot.top,
+scrolledwindow undershoot.right,
+scrolledwindow undershoot.bottom,
+scrolledwindow undershoot.left { background-image: none;}
+.text_size{font-size: 16px;}
+text{background: #e0e0e0;color: #353535}
+textview{color: #353535}
+.padded {padding: 15px 15px}
+text {color: #353535;caret-color: #353535}
+entry {color: #353535; background: #e0e0e0}
+.band_button{color: #353535;border-radius: 0px}
+.band_button:hover {background: #f0f0f0}
+.band_button:focus {color: #252525}
+tabs {background-color: #e0e0e0;box-shadow: none;border: none;}
+tab {background-color: #e0e0e0;border: none;padding: 5px;box-shadow: none; outline: none;}
+header{background: #e0e0e0;}
+.band {margin-right: 20px; margin-left: 20px;}
+arrow{color: #353535; background: #e0e0e0;border:none}
+popover{border: 1px black solid;box-shadow: 0px 0px 4px black;}
+.shadowed {box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);}
+.option_button {background: #e0e0e0; color: #353535; border-radius: 0px;}
+.option_button:hover{background: #e0e0e0; color: crimson; text-shadow: none;}
+.spaced_verticaly{margin-bottom: 10px;}
+.thinely_spaced_verticaly{margin-bottom: 2px;}
+.padded_verticaly{padding-bottom: 10px;}
+.squared{border-radius: 0px;}
+.stack-switcher > button{border-radius: 0px;border: none;box-shadow: none;}
+.stack-switcher > button.text-button {
+	color:#353535;
+	background:#d0d0d0;
+	text-shadow: none;
+}
+.stack-switcher > button.text-button:checked{
+	background: #e0e0e0;box-shadow: none;
+}
+.dark_background {background: #d0d0d0}
+.alternative_hover:hover{background: white}
+.generous_vert_space{margin-bottom: 25px;}
+.up_space{margin-top: 25px}
+.up_vert_padding{padding-top: 10px;}
+.custom_listbox > row{
+	background: transparent;box-shadow: none;
+}
+.custom_listbox > row:selected{
+	color: #353535;
+}
+.clear_caracter_hover:hover{color: black;}
+.popover_rightbar{border-left: solid #f0f0f0 4px}
+.red_hover:hover{color: crimson;}

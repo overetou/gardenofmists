@@ -2,3 +2,4 @@ obj/*
 gardenofmists
 .vscode/c_cpp_properties.json
 gardenoftests
+.buildconfig
