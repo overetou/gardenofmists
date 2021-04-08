@@ -8,7 +8,7 @@ INC_DIRS=includes
 LIB_DIRS=
 
 #Compilation related indications
-CC=gcc
+CC=clang
 CFLAGS=-Wall -Wextra -Werror `pkg-config --cflags gtk+-3.0`
 LIBS=git2
 
@@ -24,9 +24,11 @@ VPATH=$(SRC_DIR)
 
 .phony: $(TARGET) clean re
 
+all: $(TARGET)
+
 $(TARGET): $(OBJS)	
 	@$(CC) $(CFLAGS) -MMD $(OBJS) -o $(TARGET) $(LIBIDR_FLAGS) $(LIBS_FLAGS) `pkg-config --libs gtk+-3.0`
-	@echo "\033[0;32mCompilation succeeded.\033[0m"
+	@echo "Compilation succeeded."
 
 $(OBJS): $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(INC_DIRS)/* |$(OBJ_DIR) 
 	@$(COMPILE.c) $(OUTPUT_OPTIONS) -o $@ $<

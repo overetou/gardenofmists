@@ -121,16 +121,16 @@ void	passing_tests()
 	test_path_len();
 }
 
-void  test_get_proj_path()
+void	test_get_proj_path()
 {
-  change_test_section ("test_get_proj_path");
-  test_strings_eq (get_proj_path(), "/media/oto/DATA/Documents/code/unix/gardenofmists/");
+	change_test_section ("test_get_proj_path");
+	test_strings_eq(get_proj_path(), "/run/media/osc/DATA/Documents/code/unix/gardenofmists/");
 }
 
 int main(void)
 {
 	(void)test_exit;
 	(void)passing_tests;//passing_tests();
-  test_get_proj_path ();
+	test_get_proj_path();
 	return 0;
 }

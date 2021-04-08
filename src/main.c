@@ -2,7 +2,7 @@
 
 void	init_master(t_master *m, const char *path)
 {
-	 m->realloc_string = NULL;
+	m->realloc_string = NULL;
 	init_str_with_len(path, strlen(path), &(m->proj_path));
 }
 
@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	critical_test(gtk_init_check(&argc, &argv),
 	"Could not initialize the gtk library.");
 	init_master(&m, get_proj_path());
-	display_notif("salut les gars", &m);
+	//display_notif("salut les gars", &m);
 	free_master(&m);
 	handle_git_error(git_libgit2_shutdown());
 	return 0;
