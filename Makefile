@@ -46,7 +46,7 @@ debian-deps:
 	echo "No dependencies"
 
 test:
-	@$(CC) $(CFLAGS) $(SRC_DIR)/common.c $(SRC_DIR)/git.c tests/test.c $(LIBIDR_FLAGS) $(LIBS_FLAGS) `pkg-config --libs gtk+-3.0` -o gardenoftests
+	@$(CC) $(CFLAGS) $(SRC_DIR)/common.c $(SRC_DIR)/git.c $(SRC_DIR)/notifications.c tests/test.c $(LIBIDR_FLAGS) $(LIBS_FLAGS) `pkg-config --libs gtk+-3.0` -o gardenoftests
 
 exec_test:
 	./gardenoftests

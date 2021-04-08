@@ -1,6 +1,15 @@
 #include "gardenofmists.h"
 #include <libgen.h>
 
+char	*strnew(const char *model)
+{
+	int l = strlen(model);
+	char *new = malloc(l);
+
+	strncpy(new, model, l);
+	return new;
+}
+
 void	memcopy(char *dest, const char *src, const UINT len)
 {
 	UINT i = 0;
@@ -35,21 +44,21 @@ t_str	*init_str_with_len(char *s, UINT len, t_str *to_init)
 }
 
 //Adds the given string to the path of the project.
-void	proj_path(t_const_str *path_end, t_master *m)
+void	proj_path(t_const_str *path_end)
 {
-	m->realloc_string = realloc(m->realloc_string, m->proj_path.len + path_end->len + 1);
-	memcopy(m->realloc_string, m->proj_path.s, m->proj_path.len);
-	memcopy(m->realloc_string + m->proj_path.len, path_end->s, path_end->len);
-	m->realloc_string[m->proj_path.len + path_end->len] = '\0';
+	m.realloc_string = realloc(m.realloc_string, m.proj_path.len + path_end->len + 1);
+	memcopy(m.realloc_string, m.proj_path.s, m.proj_path.len);
+	memcopy(m.realloc_string + m.proj_path.len, path_end->s, path_end->len);
+	m.realloc_string[m.proj_path.len + path_end->len] = '\0';
 }
 
-void	proj_variable_path(t_const_str *folders, t_str *path_end, t_master *m)
+void	proj_variable_path(t_const_str *folders, t_str *path_end)
 {
-	m->realloc_string = realloc(m->realloc_string, m->proj_path.len + folders->len + path_end->len + 1);
-	memcopy(m->realloc_string, m->proj_path.s, m->proj_path.len);
-	memcopy(m->realloc_string + m->proj_path.len, folders->s, folders->len);
-	memcopy(m->realloc_string + m->proj_path.len + folders->len, path_end->s, path_end->len);
-	m->realloc_string[m->proj_path.len + folders->len + path_end->len + 1] = '\0';
+	m.realloc_string = realloc(m.realloc_string, m.proj_path.len + folders->len + path_end->len + 1);
+	memcopy(m.realloc_string, m.proj_path.s, m.proj_path.len);
+	memcopy(m.realloc_string + m.proj_path.len, folders->s, folders->len);
+	memcopy(m.realloc_string + m.proj_path.len + folders->len, path_end->s, path_end->len);
+	m.realloc_string[m.proj_path.len + folders->len + path_end->len + 1] = '\0';
 }
 
 //Returns the length to last path separator character in the given string. (We know that the executable is named gardenofmists)
@@ -78,7 +87,5 @@ void critical_test(char bool_val, const char *msg)
 {
 	if (bool_val)
 		return ;
-	puts("\nError:");
-	puts(msg);
-	exit(0);
+	display_error(msg);
 }

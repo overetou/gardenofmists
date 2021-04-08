@@ -3,6 +3,8 @@
 UINT test_number;
 const char *test_section;
 
+t_master m;
+
 static void	test_exit()
 {
 	puts("Critical test failed. Stopping now.\n");
@@ -76,22 +78,26 @@ void	test_path_len()
 void	test_proj_path()
 {
 	change_test_section("proj_path");
+	char *tmp = strnew("/user/oto/gardenofmists/");
 	t_master m;
-	t_const_str e1;
+	t_str e1;
+	char *tmp2 = strnew("variables/téra.bin");
 
 	m.realloc_string = NULL;
 	#ifdef _WIN32
 	#else
-	init_str("/user/oto/gardenofmists/", &(m.proj_path));
-	init_str("variables/téra.bin", &e1);
-	proj_path(&e1, &m);
+	init_str(tmp, &(m.proj_path));
+	init_str(tmp2, &e1);
+	proj_path((t_const_str*)(&e1));
 	test_strings_eq(m.realloc_string, "/user/oto/gardenofmists/variables/téra.bin");
 	init_str("./", &(m.proj_path));
-	proj_path(init_str("yo", &e1), &m);
+	proj_path((t_const_str*)(init_str("yo", &e1)));
 	test_strings_eq(m.realloc_string, "./yo");
 	#endif
 	free(m.realloc_string);
 	m.realloc_string = NULL;
+	free(tmp);
+	free(tmp2);
 }
 
 void	test_proj_variable_path()
@@ -105,9 +111,9 @@ void	test_proj_variable_path()
 	#ifdef _WIN32
 	#else
 	init_str("/user/oto/gardenofmists/", &(m.proj_path));
-	init_str("variables/carcasson/", &e1);
-	init_str("parkéba", &e2);
-	proj_variable_path(&e1, (t_str*)(&e2), &m);
+	init_str("variables/carcasson/", (t_str*)(&e1));
+	init_str("parkéba", (t_str*)(&e2));
+	proj_variable_path(&e1, (t_str*)(&e2));
 	test_strings_eq(m.realloc_string, "/user/oto/gardenofmists/variables/carcasson/parkéba");
 	#endif
 	free(m.realloc_string);
@@ -130,7 +136,7 @@ void	test_get_proj_path()
 int main(void)
 {
 	(void)test_exit;
-	(void)passing_tests;//passing_tests();
+	(void)passing_tests;passing_tests();
 	test_get_proj_path();
 	return 0;
 }
