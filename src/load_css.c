@@ -8,14 +8,14 @@ void load_css(t_master *m)
 	t_const_str		path_end;
 	char			*s;
 
-	proj_path(init_str("variables" SLASH_S "settings.bin", &path_end), m);
+	proj_path(init_const_str("variables" SLASH_S "settings.bin", &path_end), m);
 	global_settings = fopen(m->realloc_string, "rb");
 	if (global_settings)
 	{
 		if (fread(&c, 1, 1, global_settings))//Taking darmode toogle state from settings file, and loading the corresponding css file.
 		{
 			m->dark_mode = c;
-			proj_path(init_str((c ? "variables" SLASH_S "darkstyle.css" : "variables" SLASH_S "lightstyle.css"), &path_end), m);
+			proj_path(init_const_str((c ? "variables" SLASH_S "darkstyle.css" : "variables" SLASH_S "lightstyle.css"), &path_end), m);
 			style_provider = gtk_css_provider_new();
 			gtk_css_provider_load_from_path(style_provider, m->realloc_string, NULL);
 		}

@@ -1,6 +1,6 @@
 #include "gardenofmists.h"
 
-void	init_master(t_master *m, const char *path)
+void	init_master(t_master *m, char *path)
 {
 	m->realloc_string = NULL;
 	init_str_with_len(path, strlen(path), &(m->proj_path));
@@ -9,6 +9,7 @@ void	init_master(t_master *m, const char *path)
 static void  free_master(t_master *m)
 {
 	free(m->realloc_string);
+	free(m->proj_path.s);
 }
 
 int main(int argc, char **argv)

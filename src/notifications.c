@@ -5,7 +5,7 @@ void	display_notif(const char *msg, t_master *m)
 	char *s;
 	t_const_str logo_path;
 
-	proj_path(init_str("assets/logo.svg", &logo_path), m);
+	proj_path(init_const_str("assets/logo.svg", &logo_path), m);
 	#ifdef _WIN32
 	#else
 	s = malloc(m->proj_path.len + 66 + strlen(msg));

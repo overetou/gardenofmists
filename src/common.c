@@ -12,14 +12,22 @@ void	memcopy(char *dest, const char *src, const UINT len)
 	}
 }
 
-t_const_str	*init_str(const char *s, t_const_str *to_init)
+t_str	*init_str(char *s, t_str *to_init)
 {
 	to_init->s = s;
 	to_init->len = strlen(s);
 	return to_init;
 }
 
-t_const_str	*init_str_with_len(const char *s, UINT len, t_const_str *to_init)
+
+t_const_str	*init_const_str(const char *s, t_const_str *to_init)
+{
+	to_init->s = s;
+	to_init->len = strlen(s);
+	return to_init;
+}
+
+t_str	*init_str_with_len(char *s, UINT len, t_str *to_init)
 {
 	to_init->s = s;
 	to_init->len = len;
@@ -55,10 +63,10 @@ UINT	path_len(const char *path)
 
 char  *get_proj_path(void)
 {
-	char *path = malloc (80);
+	char *path = malloc(80);
 	int dest_len = 80;
 
-	critical_test(readlink ("/proc/self/exe", path, dest_len) != -1,
+	critical_test(readlink("/proc/self/exe", path, dest_len) != -1,
 	"Could not read the location of the executable (must be < 80)");
 	dirname(path);
 	strcat(path, "/");
