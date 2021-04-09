@@ -9,7 +9,7 @@ LIB_DIRS=
 
 #Compilation related indications
 CC=clang
-CFLAGS=-Wall -Wextra -Werror `pkg-config --cflags gtk+-3.0`
+CFLAGS= -g -Wall -Wextra -Werror `pkg-config --cflags gtk+-3.0`
 LIBS=git2
 
 #From there we use the info to compile everything.
@@ -45,8 +45,6 @@ re: clean $(TARGET)
 debian-deps:
 	echo "No dependencies"
 
-test:
-	@$(CC) $(CFLAGS) $(SRC_DIR)/common.c $(SRC_DIR)/git.c $(SRC_DIR)/notifications.c tests/test.c $(LIBIDR_FLAGS) $(LIBS_FLAGS) `pkg-config --libs gtk+-3.0` -o gardenoftests
-
-exec_test:
-	./gardenoftests
+test: all
+	@$(CC) $(CFLAGS) $(OBJ_DIR)/common.o $(OBJ_DIR)/git.o $(OBJ_DIR)/notifications.o tests/test.c $(LIBIDR_FLAGS) $(LIBS_FLAGS) `pkg-config --libs gtk+-3.0` -o gardenoftests
+	clear && ./gardenoftests
