@@ -4,7 +4,6 @@
 char	*strnew(const char *model)
 {
 	int l = strlen(model);
-	printf("\n\nl = %d.\n", l);
 	char *new = malloc(l + 1);
 
 	strncpy(new, model, l);

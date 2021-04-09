@@ -79,7 +79,6 @@ void	test_proj_path()
 {
 	change_test_section("proj_path");
 	char *tmp = strnew("/user/oto/gardenofmists/");
-	t_master m;
 	t_str e1;
 	char *tmp2 = strnew("variables/téra.bin");
 
@@ -103,7 +102,6 @@ void	test_proj_path()
 void	test_proj_variable_path()
 {
 	change_test_section("proj_variable_path");
-	t_master m;
 	t_const_str e1;
 	t_const_str e2;
 
