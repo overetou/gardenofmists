@@ -19,6 +19,8 @@
 # define UINT unsigned int
 # define BOOL char
 
+# define ED_SCREEN m.current_screen.editor
+# define WELC_SCREEN m.current_screen.welcome
 # define PROJ_PATH_LEN 80
 
 typedef struct	s_str
@@ -33,10 +35,29 @@ typedef struct	s_const_str
 	UINT		len;
 }				t_const_str;
 
+typedef struct	s_welc_screen
+{
+}				t_welc_screen;
+
+typedef struct	s_ed_screen
+{
+}				t_ed_screen;
+
+typedef union	u_screen
+{
+	t_ed_screen		editor;
+	t_welc_screen	welcome;
+}				t_screen;
+
 typedef struct	s_win
 {
 	GObject		*gobj;
+	int			handler_id;
+	void		(*save_work_func)(void);
+	char		(*unsaved_work_remains_func)(void);
+	void		(*clean_before_quit_func)(void);
 	BOOL		fullscreen;
+	BOOL		can_show_creds;
 }				t_win;
 
 typedef struct	s_master
@@ -46,6 +67,7 @@ typedef struct	s_master
 	BOOL		dark_mode;
 	GtkBuilder	*builder;
 	t_win		w;
+	t_screen	current_screen;
 }				t_master;
 
 extern t_master m;
@@ -66,9 +88,15 @@ char	*get_proj_path(void);
 void	load_css(void);
 //ui file
 void	load_builder(void);
+void	load_window(void);
 //notifications
 void	display_error(const char *s);
 void	display_notif(const char *msg);
 //events
-gboolean handle_delete_event(GtkWidget *widget, GdkEvent *event, void *dummy);
+gboolean	handle_delete_event(GtkWidget *widget, GdkEvent *event, void *dummy);
+char		on_window_keypress(GtkWidget *win, GdkEventKey *event);
+void		do_nothing(void);
+BOOL		return_false(void);
+//welcome screen
+void		free_welcome_screen(void);
 #endif
