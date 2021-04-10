@@ -35,9 +35,10 @@ typedef struct	s_const_str
 
 typedef struct s_master
 {
-	t_str	proj_path;
-	char	*realloc_string;
-	BOOL	dark_mode;
+	t_str		proj_path;
+	char		*realloc_string;
+	BOOL		dark_mode;
+	GtkBuilder	*builder;
 } t_master;
 
 extern t_master m;
@@ -55,7 +56,9 @@ void	proj_path(t_const_str *path_end);
 void	proj_variable_path(t_const_str *folders, t_str *path_end);
 char	*get_proj_path(void);
 //css
-void	load_css(t_master *m);
+void	load_css(void);
+//ui file
+void	load_builder(void);
 //notifications
 void	display_error(const char *s);
 void	display_notif(const char *msg);
