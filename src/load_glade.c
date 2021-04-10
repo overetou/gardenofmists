@@ -10,6 +10,7 @@ void load_builder(void)
 		"visuals.ui could not be opened.");
 }
 
+//TODO: read the fullscreen state from a setting file.
 void load_window(void)
 {
 	//gtk obj init
@@ -17,7 +18,8 @@ void load_window(void)
 	g_signal_connect(m.w.gobj, "delete-event", G_CALLBACK(handle_delete_event), NULL);
 	//fullscreen management
 	m.w.fullscreen = FALSE;
-	//gtk_window_fullscreen(GTK_WINDOW(m.w.gobj));
+	if (m.w.fullscreen)
+		gtk_window_fullscreen(GTK_WINDOW(m.w.gobj));
 	//keys interception
 	gtk_widget_add_events(GTK_WIDGET(m.w.gobj), GDK_KEY_PRESS_MASK);//TODO: check if this line is useful
 	m.w.handler_id = g_signal_connect(m.w.gobj, "key_press_event", G_CALLBACK(on_window_keypress), NULL);

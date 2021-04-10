@@ -18,6 +18,7 @@ static void  free_master()
 	free(m.realloc_string);
 	free(m.proj_path.s);
 	g_object_unref(m.builder);
+	gtk_widget_destroy(GTK_WIDGET(m.w.gobj));
 }
 
 int main(int argc, char **argv)
