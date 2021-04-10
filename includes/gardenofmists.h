@@ -67,12 +67,13 @@ typedef struct	s_win
 
 typedef struct	s_master
 {
-	t_str		proj_path;
+	t_str		program_path;
 	char		*realloc_string;
 	BOOL		dark_mode;
 	GtkBuilder	*builder;
 	t_win		w;
 	t_screen	current_screen;
+	t_str		proj_dir;
 }				t_master;
 
 extern t_master m;
@@ -91,7 +92,7 @@ void	show_shortcuts_and_creds(GtkButton *clicked, void *dummy);
 //git
 void	handle_git_error(const int error_code);
 UINT	path_len(const char *path);
-void	proj_path(t_const_str *path_end);
+void	program_path(t_const_str *path_end);
 void	proj_variable_path(t_const_str *folders, t_str *path_end);
 char	*get_proj_path(void);
 //css

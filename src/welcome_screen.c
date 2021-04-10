@@ -32,6 +32,21 @@ void	display_new_proj_box(GObject *unused, t_welc_screen *welcome_screen)
 	set_sub_menu_tooltips(welcome_screen, TRUE);
 }
 
+void	choose_dir_button_exec(GtkButton *button)
+{
+	GtkFileChooserNative	*native_chooser;
+
+	native_chooser = gtk_file_chooser_native_new("Select Directory", NULL, GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER, "Confirm", "Cancel");
+	if (gtk_native_dialog_run(GTK_NATIVE_DIALOG(native_chooser)) == GTK_RESPONSE_ACCEPT)
+	{
+		//TODO check the os and if windows, replace the / by \.
+		m.proj_dir.s = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(native_chooser));
+		m.proj_dir.len = strlen(m.proj_dir.s);
+		gtk_widget_set_tooltip_text(GTK_WIDGET(button), m.proj_dir.s);
+	}
+	g_object_unref(native_chooser);
+}
+
 void	load_welcome_screen(void)
 {
 	//Get subreferences of welcome screen
@@ -42,8 +57,8 @@ void	load_welcome_screen(void)
 	//Connect buttons
 	g_signal_connect(gtk_builder_get_object(m.builder, "new_button"), "clicked", G_CALLBACK(display_new_proj_box), &(WELC_SCREEN));
 	g_signal_connect(gtk_builder_get_object(m.builder, "cancel_button"), "clicked", G_CALLBACK(hide_new_proj_box), &(WELC_SCREEN));
-	/* g_signal_connect(gtk_builder_get_object(m.builder, "open_button"), "clicked", G_CALLBACK(open_request), NULL);
 	g_signal_connect(gtk_builder_get_object(m.builder, "choose_dir_button"), "clicked", G_CALLBACK(choose_dir_button_exec), NULL);
+	/* g_signal_connect(gtk_builder_get_object(m.builder, "open_button"), "clicked", G_CALLBACK(open_request), NULL);
 	g_signal_connect(gtk_builder_get_object(m.builder, "confirm_button"), "clicked", G_CALLBACK(create_new_proj), NULL);*/
 	g_signal_connect(gtk_builder_get_object(m.builder, "creds_button"),
 	"clicked", G_CALLBACK(show_shortcuts_and_creds), NULL);

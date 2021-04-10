@@ -65,7 +65,7 @@ void show_shortcuts_and_creds(GtkButton *clicked, void *dummy)
 	if (m.w.can_show_creds == TRUE)
 	{
 		m.w.can_show_creds = FALSE;
-		proj_path(&license_path);
+		program_path(&license_path);
 		license = fopen(m.realloc_string, "r");
 		if (license == NULL)
 		{

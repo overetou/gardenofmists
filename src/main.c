@@ -5,7 +5,7 @@ t_master m;
 void	init_master(char *path)
 {
 	m.realloc_string = NULL;
-	init_str_with_len(path, strlen(path), &(m.proj_path));
+	init_str_with_len(path, strlen(path), &(m.program_path));
 	load_css();
 	load_builder();
 	load_window();
@@ -16,7 +16,7 @@ void	init_master(char *path)
 static void  free_master()
 {
 	free(m.realloc_string);
-	free(m.proj_path.s);
+	free(m.program_path.s);
 	g_object_unref(m.builder);
 	gtk_widget_destroy(GTK_WIDGET(m.w.gobj));
 }

@@ -85,12 +85,12 @@ void	test_proj_path()
 	m.realloc_string = NULL;
 	#ifdef _WIN32
 	#else
-	init_str(tmp, &(m.proj_path));
+	init_str(tmp, &(m.program_path));
 	init_str(tmp2, &e1);
-	proj_path((t_const_str*)(&e1));
+	program_path((t_const_str*)(&e1));
 	test_strings_eq(m.realloc_string, "/user/oto/gardenofmists/variables/téra.bin");
-	init_str("./", &(m.proj_path));
-	proj_path((t_const_str*)(init_str("yo", &e1)));
+	init_str("./", &(m.program_path));
+	program_path((t_const_str*)(init_str("yo", &e1)));
 	test_strings_eq(m.realloc_string, "./yo");
 	#endif
 	free(m.realloc_string);
@@ -108,7 +108,7 @@ void	test_proj_variable_path()
 	m.realloc_string = NULL;
 	#ifdef _WIN32
 	#else
-	init_str("/user/oto/gardenofmists/", &(m.proj_path));
+	init_str("/user/oto/gardenofmists/", &(m.program_path));
 	init_str("variables/carcasson/", (t_str*)(&e1));
 	init_str("parkéba", (t_str*)(&e2));
 	proj_variable_path(&e1, (t_str*)(&e2));
