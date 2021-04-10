@@ -33,13 +33,20 @@ typedef struct	s_const_str
 	UINT		len;
 }				t_const_str;
 
-typedef struct s_master
+typedef struct	s_win
+{
+	GObject		*gobj;
+	BOOL		fullscreen;
+}				t_win;
+
+typedef struct	s_master
 {
 	t_str		proj_path;
 	char		*realloc_string;
 	BOOL		dark_mode;
 	GtkBuilder	*builder;
-} t_master;
+	t_win		w;
+}				t_master;
 
 extern t_master m;
 
@@ -62,4 +69,6 @@ void	load_builder(void);
 //notifications
 void	display_error(const char *s);
 void	display_notif(const char *msg);
+//events
+gboolean handle_delete_event(GtkWidget *widget, GdkEvent *event, void *dummy);
 #endif
