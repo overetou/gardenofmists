@@ -73,11 +73,14 @@ UINT	path_len(const char *path)
 
 char  *get_proj_path(void)
 {
-	char *path = malloc(80);
-	int dest_len = 80;
+	char *path = malloc(PROJ_PATH_LEN);
+	int dest_len = PROJ_PATH_LEN;
+	ssize_t	actual_len;
 
-	critical_test(readlink("/proc/self/exe", path, dest_len) != -1,
+	actual_len = readlink("/proc/self/exe", path, dest_len);
+	critical_test(actual_len != -1 && actual_len <= PROJ_PATH_LEN - 1,
 	"Could not read the location of the executable (must be < 80)");
+	path[actual_len] = '\0';
 	dirname(path);
 	strcat(path, "/");
 	return path;

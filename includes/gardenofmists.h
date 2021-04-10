@@ -3,6 +3,8 @@
 
 # include <git2.h>
 # include <gtk/gtk.h>
+# include <fcntl.h>
+# include <unistd.h>
 
 # ifdef _WIN32
 #  define MKDIR(x) mkdir(x)
@@ -16,6 +18,8 @@
 
 # define UINT unsigned int
 # define BOOL char
+
+# define PROJ_PATH_LEN 80
 
 typedef struct	s_str
 {

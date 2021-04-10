@@ -127,8 +127,12 @@ void	passing_tests()
 
 void	test_get_proj_path()
 {
+	char	*candidate;
+
 	change_test_section ("test_get_proj_path");
-	test_strings_eq(get_proj_path(), "/run/media/osc/DATA/Documents/code/unix/gardenofmists/");
+	candidate = get_proj_path();
+	test_strings_eq(candidate, "/run/media/osc/DATA/Documents/code/unix/gardenofmists/");
+	free(candidate);
 }
 
 int main(void)
