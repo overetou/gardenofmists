@@ -55,11 +55,11 @@ void	proj_path(t_const_str *path_end)
 
 void	proj_variable_path(t_const_str *folders, t_str *path_end)
 {
-	m.realloc_string = realloc(m.realloc_string, m.proj_path.len + folders->len + path_end->len + 1);
+	m.realloc_string = realloc(m.realloc_string, (m.proj_path.len) + (folders->len) + (path_end->len) + 1);
 	memcopy(m.realloc_string, m.proj_path.s, m.proj_path.len);
 	memcopy(m.realloc_string + m.proj_path.len, folders->s, folders->len);
 	memcopy(m.realloc_string + m.proj_path.len + folders->len, path_end->s, path_end->len);
-	m.realloc_string[m.proj_path.len + folders->len + path_end->len + 1] = '\0';
+	m.realloc_string[(m.proj_path.len) + (folders->len) + (path_end->len)] = '\0';
 }
 
 //Returns the length to last path separator character in the given string. (We know that the executable is named gardenofmists)
