@@ -37,6 +37,11 @@ typedef struct	s_const_str
 
 typedef struct	s_welc_screen
 {
+	GObject		*gobj;
+	GObject		*new_proj_box_space;
+	GObject		*projs_display_box;
+	GObject		*proj_name_entry;
+	char		**proj_string_list;
 }				t_welc_screen;
 
 typedef struct	s_ed_screen
@@ -105,5 +110,6 @@ char		on_window_keypress(GtkWidget *win, GdkEventKey *event);
 void		do_nothing(void);
 BOOL		return_false(void);
 //welcome screen
-void		free_welcome_screen(void);
+void	free_welcome_screen(void);
+void	load_welcome_screen(void);
 #endif

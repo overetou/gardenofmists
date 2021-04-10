@@ -9,7 +9,8 @@ void	init_master(char *path)
 	load_css();
 	load_builder();
 	load_window();
-	//gtk_container_add(GTK_CONTAINER(m.w.gobj), GTK_WIDGET(WELCOME_SCREEN.gtk_obj));
+	load_welcome_screen();
+	gtk_container_add(GTK_CONTAINER(m.w.gobj), GTK_WIDGET(WELC_SCREEN.gobj));
 }
 
 static void  free_master()

@@ -40,6 +40,7 @@ void quit_program(void)
 	}
 }
 
+//TODO: This system doest not take account of the actions of the desktop.
 void toggle_fullscreen(void)
 {
 	if (m.w.fullscreen)
@@ -49,11 +50,11 @@ void toggle_fullscreen(void)
 	m.w.fullscreen = !(m.w.fullscreen);
 }
 
-
+//TODO make that window independant, not a popup, so that the execution of the application is unaltered.
 void show_shortcuts_and_creds(GtkButton *clicked, void *dummy)
 {
 	FILE			*license;
-	char			license_text[34667];//This is the exact len of the license file.
+	char			license_text[34667 + 1];//This is the exact len of the license file (+ the NULL terminating byte).
 	GtkAboutDialog	*popup;
 	const gchar 	*authors[] = {"Oscar Veretout", NULL};
 	GList			*kids;
@@ -68,6 +69,7 @@ void show_shortcuts_and_creds(GtkButton *clicked, void *dummy)
 		license = fopen(m.realloc_string, "r");
 		if (license && fread(license_text, 1, 34667, license) == 34667)
 		{
+			license_text[34667] = '\0';
 			popup = GTK_ABOUT_DIALOG(gtk_about_dialog_new());
 			gtk_about_dialog_set_authors(popup, authors);
 			gtk_about_dialog_set_version(popup, "Version: 0.1");
