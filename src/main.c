@@ -5,6 +5,7 @@ t_master m;
 void	init_master(char *path)
 {
 	m.realloc_string = NULL;
+	m.proj_dir.len = 0;
 	init_str_with_len(path, strlen(path), &(m.program_path));
 	load_css();
 	load_builder();

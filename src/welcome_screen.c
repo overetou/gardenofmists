@@ -47,6 +47,50 @@ void	choose_dir_button_exec(GtkButton *button)
 	g_object_unref(native_chooser);
 }
 
+void	create_new_proj(GtkWidget *button)
+{
+	FILE	*meta_settings;
+	FILE	*global_projects_list;
+	int		entry_len;
+
+	entry_len = strlen(gtk_entry_get_text(WELC_SCREEN.proj_name_entry));
+	if (m.proj_dir.len && entry_len)
+	{
+		m.proj_dir.s = realloc(m.proj_dir.s, m.proj_dir.len + entry_len + 3);
+		m.proj_dir.s[m.proj_dir.len] = SLASH_C;
+		strcpylen(m.proj_dir.s + m.proj_dir.len + 1, gtk_entry_get_text(WELC_SCREEN.proj_name_entry), entry_len);
+		m.proj_dir.len += 2 + entry_len;
+		m.proj_dir.s[m.proj_dir.len - 1] = SLASH_C;
+		m.proj_dir.s[m.proj_dir.len] = '\0';
+		m.realloc_string = realloc(m.realloc_string, m.proj_dir.len + 18);//TODO is there a / at the end of the string ? Is this string freed at some point and where?
+		strcpylen(m.realloc_string, m.proj_dir_path, m.proj_dir.len);
+		//printf("basic path = %s\n", m.proj_dir_path);
+		if (MKDIR(m.proj_dir_path)
+		|| MKDIR(strcpylen_return_str(m.realloc_string, "text_sections", m.proj_dir.len, 14))
+		|| MKDIR(strcpylen_return_str(m.realloc_string, "meta", m.proj_dir.len, 5))
+		|| !(meta_settings = fopen(strcpylen_return_str(m.realloc_string,"meta" SLASH_S "settings.bin", m.proj_dir.len, 18), "wb")))
+			display_error("Failed to create new proj directory structure.");
+		else
+		{
+			fwrite("\0", 1, 1, meta_settings);
+			fclose(meta_settings);
+			assemble_paths(m.arg0, m.path_len, "variables" SLASH_S "projects_list.txt", &(m.realloc_string));
+			global_projects_list = fopen(m.realloc_string, "a");
+			if (global_projects_list)
+			{
+				fwrite(m.proj_dir_path, 1, m.proj_dir.len, global_projects_list);
+				fwrite("\n", 1, 1, global_projects_list);
+				fclose(global_projects_list);
+			}
+			else
+				display_error("Failed to update the global project list for the welcome screen. You will have to open it manually next time.");
+			open_project(m, 1);
+		}
+	}
+	else
+		display_error("Please fill all of the required fields before attempting to create a new project.\n(Note that the \"Directory\" button allows you to choose where your project will be stored.\nYou will be able to see the path you selected by hovering upon the \"Directory\" button.)");
+}
+
 void	load_welcome_screen(void)
 {
 	//Get subreferences of welcome screen
@@ -58,8 +102,9 @@ void	load_welcome_screen(void)
 	g_signal_connect(gtk_builder_get_object(m.builder, "new_button"), "clicked", G_CALLBACK(display_new_proj_box), &(WELC_SCREEN));
 	g_signal_connect(gtk_builder_get_object(m.builder, "cancel_button"), "clicked", G_CALLBACK(hide_new_proj_box), &(WELC_SCREEN));
 	g_signal_connect(gtk_builder_get_object(m.builder, "choose_dir_button"), "clicked", G_CALLBACK(choose_dir_button_exec), NULL);
+	g_signal_connect(gtk_builder_get_object(m.builder, "confirm_button"), "clicked", G_CALLBACK(create_new_proj), NULL);
 	/* g_signal_connect(gtk_builder_get_object(m.builder, "open_button"), "clicked", G_CALLBACK(open_request), NULL);
-	g_signal_connect(gtk_builder_get_object(m.builder, "confirm_button"), "clicked", G_CALLBACK(create_new_proj), NULL);*/
+	*/
 	g_signal_connect(gtk_builder_get_object(m.builder, "creds_button"),
 	"clicked", G_CALLBACK(show_shortcuts_and_creds), NULL);
 	//set_sub_menu_tooltips(&(WELC_SCREEN), FALSE);
