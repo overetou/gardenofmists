@@ -11,7 +11,8 @@ void	load_css(void)
 	global_settings = fopen(m.realloc_string, "rb");
 	if (global_settings)
 	{
-		if (fread(&(m.dark_mode), 1, 1, global_settings))//Taking darkmode toogle state from settings file, and loading the corresponding css file.
+		//Taking darkmode toogle state from settings file, and loading the corresponding css file.
+		if (fread(&(m.dark_mode), 1, 1, global_settings))
 		{
 			proj_path(init_const_str((m.dark_mode ? "variables" SLASH_S "darkstyle.css" : "variables" SLASH_S "lightstyle.css"), &path_end));
 			style_provider = gtk_css_provider_new();

@@ -67,7 +67,12 @@ void show_shortcuts_and_creds(GtkButton *clicked, void *dummy)
 		m.w.can_show_creds = FALSE;
 		proj_path(&license_path);
 		license = fopen(m.realloc_string, "r");
-		if (license && fread(license_text, 1, 34667, license) == 34667)
+		if (license == NULL)
+		{
+			display_notif("Failed to open the license file.");
+			return;
+		}
+		if (fread(license_text, 1, 34667, license) == 34667)
 		{
 			license_text[34667] = '\0';
 			popup = GTK_ABOUT_DIALOG(gtk_about_dialog_new());
@@ -89,7 +94,8 @@ void show_shortcuts_and_creds(GtkButton *clicked, void *dummy)
 			m.w.can_show_creds = TRUE;
 		}
 		else
-			display_error("Could not open or read the correct amount of bytes from the license file.");
+			display_error("Could not read the correct amount of bytes from the license file.");
+		fclose(license);
 	}
 }
 
