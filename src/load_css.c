@@ -1,6 +1,6 @@
 #include "gardenofmists.h"
 
-void load_css(void)
+void	load_css(void)
 {
 	GtkCssProvider	*style_provider;
 	FILE			*global_settings;
@@ -36,4 +36,29 @@ void load_css(void)
 		sprintf(s, "Could not open %s.", m.realloc_string);
 		display_error(s);
 	}
+}
+
+void	set_norm_for_sol_back(GtkWidget *w)
+{
+	GtkStyleContext *style;
+
+	style = gtk_widget_get_style_context(w);
+	gtk_style_context_add_class(style, "solid_background");
+	gtk_style_context_add_class(style, "normal_foreground");
+}
+
+void	style_dialog(GtkDialog *popup)
+{
+	gtk_window_set_position(GTK_WINDOW(popup), GTK_WIN_POS_CENTER_ALWAYS);
+	set_norm_for_sol_back(GTK_WIDGET(popup));
+}
+
+void	style_dialog_button(GtkWidget *button)
+{
+	GtkStyleContext *context;
+
+	context = gtk_widget_get_style_context(button);
+	gtk_style_context_add_class(context, "popover_background");
+	gtk_style_context_add_class(context, "no_border");
+	gtk_style_context_add_class(context, "band_button");
 }

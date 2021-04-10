@@ -16,8 +16,8 @@ void load_window(void)
 	m.w.gobj = gtk_builder_get_object(m.builder, "master_window");
 	g_signal_connect(m.w.gobj, "delete-event", G_CALLBACK(handle_delete_event), NULL);
 	//fullscreen management
-	m.w.fullscreen = TRUE;
-	gtk_window_fullscreen(GTK_WINDOW(m.w.gobj));//Comment and put the 1 above to 0 to launch in windowed mode.
+	m.w.fullscreen = FALSE;
+	//gtk_window_fullscreen(GTK_WINDOW(m.w.gobj));
 	//keys interception
 	gtk_widget_add_events(GTK_WIDGET(m.w.gobj), GDK_KEY_PRESS_MASK);//TODO: check if this line is useful
 	m.w.handler_id = g_signal_connect(m.w.gobj, "key_press_event", G_CALLBACK(on_window_keypress), NULL);

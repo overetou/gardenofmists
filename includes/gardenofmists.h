@@ -78,6 +78,11 @@ void	critical_test(char bool_val, const char *msg);
 t_str	*init_str(char *s, t_str *to_init);
 t_const_str	*init_const_str(const char *s, t_const_str *to_init);
 t_str	*init_str_with_len(char *s, UINT len, t_str *to_init);
+GList	*dive_through_children(int dive_nb, int *indexes_tab, GtkContainer *parent);
+//generic actions
+void	toggle_fullscreen(void);
+void	quit_program(void);
+void	show_shortcuts_and_creds(GtkButton *clicked, void *dummy);
 //git
 void	handle_git_error(const int error_code);
 UINT	path_len(const char *path);
@@ -85,6 +90,8 @@ void	proj_path(t_const_str *path_end);
 void	proj_variable_path(t_const_str *folders, t_str *path_end);
 char	*get_proj_path(void);
 //css
+void	style_dialog(GtkDialog *popup);
+void	style_dialog_button(GtkWidget *button);
 void	load_css(void);
 //ui file
 void	load_builder(void);

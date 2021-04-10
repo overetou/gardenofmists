@@ -1,6 +1,22 @@
 #include "gardenofmists.h"
 #include <libgen.h>
 
+//This is black magic. Only use it if you have no other choice. You may loose your mind.
+GList	*dive_through_children(int dive_nb, int *indexes_tab, GtkContainer *parent)
+{
+	int i = 0;
+	GList *result;
+
+	while(i != dive_nb)
+	{
+		result = gtk_container_get_children(parent);
+		parent = GTK_CONTAINER(g_list_nth(result, indexes_tab[i])->data);
+		g_list_free(result);
+		i++;
+	}
+	return gtk_container_get_children(parent);
+}
+
 char	*strnew(const char *model)
 {
 	int l = strlen(model);
