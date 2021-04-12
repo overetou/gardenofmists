@@ -75,9 +75,9 @@ void	test_path_len()
 	#endif
 }
 
-void	test_proj_path()
+void	test_program_path()
 {
-	change_test_section("proj_path");
+	change_test_section("program_path");
 	char *tmp = strnew("/user/oto/gardenofmists/");
 	t_str e1;
 	char *tmp2 = strnew("variables/téra.bin");
@@ -99,9 +99,9 @@ void	test_proj_path()
 	free(tmp2);
 }
 
-void	test_proj_variable_path()
+void	test_program_variable_path()
 {
-	change_test_section("proj_variable_path");
+	change_test_section("program_variable_path");
 	t_const_str e1;
 	t_const_str e2;
 
@@ -111,7 +111,7 @@ void	test_proj_variable_path()
 	init_str("/user/oto/gardenofmists/", &(m.program_path));
 	init_str("variables/carcasson/", (t_str*)(&e1));
 	init_str("parkéba", (t_str*)(&e2));
-	proj_variable_path(&e1, (t_str*)(&e2));
+	program_variable_path(&e1, (t_str*)(&e2));
 	test_strings_eq(m.realloc_string, "/user/oto/gardenofmists/variables/carcasson/parkéba");
 	#endif
 	free(m.realloc_string);
@@ -120,8 +120,8 @@ void	test_proj_variable_path()
 
 void	passing_tests()
 {
-	test_proj_path();
-	test_proj_variable_path();
+	test_program_path();
+	test_program_variable_path();
 	test_path_len();
 }
 
@@ -129,7 +129,7 @@ void	test_get_proj_path()
 {
 	char	*candidate;
 
-	change_test_section ("test_get_proj_path");
+	change_test_section ("test_get_program_path");
 	candidate = get_proj_path();
 	test_strings_eq(candidate, "/run/media/osc/DATA/Documents/code/unix/gardenofmists/");
 	free(candidate);

@@ -69,7 +69,16 @@ void	program_path(t_const_str *path_end)
 	m.realloc_string[m.program_path.len + path_end->len] = '\0';
 }
 
-void	proj_variable_path(t_const_str *folders, t_str *path_end)
+const char	*project_path(t_const_str *path_end)
+{
+	m.realloc_string = realloc(m.realloc_string, m.proj_dir.len + path_end->len + 1);
+	memcopy(m.realloc_string, m.proj_dir.s, m.proj_dir.len);
+	memcopy(m.realloc_string + m.proj_dir.len, path_end->s, path_end->len);
+	m.realloc_string[m.proj_dir.len + path_end->len] = '\0';
+	return m.realloc_string;
+}
+
+void	program_variable_path(t_const_str *folders, t_str *path_end)
 {
 	m.realloc_string = realloc(m.realloc_string, (m.program_path.len) + (folders->len) + (path_end->len) + 1);
 	memcopy(m.realloc_string, m.program_path.s, m.program_path.len);

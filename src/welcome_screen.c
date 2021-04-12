@@ -47,48 +47,56 @@ void	choose_dir_button_exec(GtkButton *button)
 	g_object_unref(native_chooser);
 }
 
+//This function will read the project path from the global variable m.
+void	open_new_project()
+{
+	t_const_str	text_sections_path	= {"text_sections", 13};
+	t_const_str	meta_path 			= {"meta", 4};
+	t_const_str	settings_path		= {"meta" SLASH_S "settings.bin", 4};
+	FILE		*meta_settings;
+	FILE		*global_projects_list;
+
+	if (MKDIR(m.proj_dir)
+		|| MKDIR(project_path(&text_sections_path))
+		|| MKDIR(project_path(&meta_path))
+		|| !(meta_settings = fopen(project_path(&settings_path), "wb")))
+			display_notif("Failed to create new proj directory structure. All of the folders that could be created were left as is.");
+		else
+		{
+			fwrite("\0", 1, 1, meta_settings);
+			fclose(meta_settings);
+			program_path("variables" SLASH_S "projects_list.txt");
+			global_projects_list = fopen(m.realloc_string, "a");
+			if (global_projects_list)
+			{
+				fwrite(m.proj_dir.s, 1, m.proj_dir.len, global_projects_list);
+				fwrite("\n", 1, 1, global_projects_list);
+				fclose(global_projects_list);
+			}
+			else
+				display_notif("Failed to update the global project list for the welcome screen. You will have to open it manually next time.");
+			//open_project(m, 1);TODO: enable this line.
+		}
+}
+
 void	create_new_proj(GtkWidget *button)
 {
-	FILE	*meta_settings;
-	FILE	*global_projects_list;
 	int		entry_len;
 
 	entry_len = strlen(gtk_entry_get_text(WELC_SCREEN.proj_name_entry));
 	if (m.proj_dir.len && entry_len)
 	{
+		//Resolving the project path. The + 2 stands for the 2 slashes, before and after the  final folder name.
 		m.proj_dir.s = realloc(m.proj_dir.s, m.proj_dir.len + entry_len + 3);
 		m.proj_dir.s[m.proj_dir.len] = SLASH_C;
 		strcpylen(m.proj_dir.s + m.proj_dir.len + 1, gtk_entry_get_text(WELC_SCREEN.proj_name_entry), entry_len);
 		m.proj_dir.len += 2 + entry_len;
 		m.proj_dir.s[m.proj_dir.len - 1] = SLASH_C;
 		m.proj_dir.s[m.proj_dir.len] = '\0';
-		m.realloc_string = realloc(m.realloc_string, m.proj_dir.len + 18);//TODO is there a / at the end of the string ? Is this string freed at some point and where?
-		strcpylen(m.realloc_string, m.proj_dir_path, m.proj_dir.len);
-		//printf("basic path = %s\n", m.proj_dir_path);
-		if (MKDIR(m.proj_dir_path)
-		|| MKDIR(strcpylen_return_str(m.realloc_string, "text_sections", m.proj_dir.len, 14))
-		|| MKDIR(strcpylen_return_str(m.realloc_string, "meta", m.proj_dir.len, 5))
-		|| !(meta_settings = fopen(strcpylen_return_str(m.realloc_string,"meta" SLASH_S "settings.bin", m.proj_dir.len, 18), "wb")))
-			display_error("Failed to create new proj directory structure.");
-		else
-		{
-			fwrite("\0", 1, 1, meta_settings);
-			fclose(meta_settings);
-			assemble_paths(m.arg0, m.path_len, "variables" SLASH_S "projects_list.txt", &(m.realloc_string));
-			global_projects_list = fopen(m.realloc_string, "a");
-			if (global_projects_list)
-			{
-				fwrite(m.proj_dir_path, 1, m.proj_dir.len, global_projects_list);
-				fwrite("\n", 1, 1, global_projects_list);
-				fclose(global_projects_list);
-			}
-			else
-				display_error("Failed to update the global project list for the welcome screen. You will have to open it manually next time.");
-			open_project(m, 1);
-		}
+		open_new_project();
 	}
 	else
-		display_error("Please fill all of the required fields before attempting to create a new project.\n(Note that the \"Directory\" button allows you to choose where your project will be stored.\nYou will be able to see the path you selected by hovering upon the \"Directory\" button.)");
+		display_notif("Please fill all of the required fields before attempting to create a new project.\n(Note that the \"Directory\" button allows you to choose where your project will be stored.\nYou will be able to see the path you selected by hovering upon the \"Directory\" button.)");
 }
 
 void	load_welcome_screen(void)
