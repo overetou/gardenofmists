@@ -11,6 +11,7 @@
 #  define SLASH_C '\\'
 #  define SLASH_S "\\"
 # else
+#  include <sys/stat.h>
 #  define MKDIR(x) mkdir(x, 0700)
 #  define SLASH_C '/'
 #  define SLASH_S "/"
@@ -90,6 +91,7 @@ UINT		path_len(const char *path);
 void		program_path(t_const_str *path_end);
 void		program_variable_path(t_const_str *folders, t_str *path_end);
 char	*get_proj_path(void);
+void	memcopy(char *dest, const char *src, const UINT len);
 //generic actions
 void	toggle_fullscreen(void);
 void	quit_program(void);
